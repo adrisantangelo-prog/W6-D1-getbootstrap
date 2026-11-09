@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EpiShop — E-commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <!-- HEADER: logo a sinistra, link a destra -->
+    <header class="bg-primary text-white py-3">
+      <div class="container d-flex justify-content-between align-items-center">
+        <h1 class="fs-3 m-0">EpiShop</h1>
+        <nav>
+          <a href="#" class="text-white text-decoration-none mx-2">Prodotti</a>
+          <a href="#" class="text-white text-decoration-none mx-2">Offerte</a>
+          <!-- "Contatti" nascosto solo su mobile, visibile da md (768px) in su -->
+          <a href="#" class="text-white text-decoration-none mx-2 d-none d-md-inline">Contatti</a>
+          <!-- "Account" visibile solo da desktop (lg, 992px) in su -->
+          <a href="#" class="text-white text-decoration-none mx-2 d-none d-lg-inline">Account</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO: titolo, sottotitolo, bottone CTA -->
+    <section class="bg-light py-5">
+      <div class="container text-center">
+        <h2 class="display-6 fw-bold mb-3">Saldi di primavera</h2>
+        <p class="fs-5 text-muted mb-4">Scopri le offerte sui prodotti in evidenza, fino al 50% di sconto.</p>
+        <a href="#" class="btn btn-primary px-4">Vedi i prodotti</a>
+      </div>
+    </section>
+
+    <main class="container my-5">
+      <div class="row">
+
+        <!-- SIDEBAR: nascosta fino a lg (992px), visibile da lg in su -->
+        <aside class="col-lg-3 d-none d-lg-block mb-4">
+          <div class="bg-light p-3 rounded border">
+            <h3 class="fs-5 fw-bold mb-3">Categorie</h3>
+            <p class="mb-2">Scarpe</p>
+            <p class="mb-2">T-shirt</p>
+            <p class="mb-2">Borse</p>
+            <p class="mb-0">Accessori</p>
+          </div>
+        </aside>
+
+        <!-- CONTENUTO: tutta la riga su mobile/tablet, 9 colonne da lg -->
+        <section class="col-12 col-lg-9">
+          <h2 class="fs-3 fw-bold mb-4 text-center text-md-start">Prodotti in evidenza</h2>
+
+          <!-- Griglia: 1 per riga (mobile) / 2 (md) / 3 (lg) / 4 (xxl) -->
+          <div class="row">
+
+            <article class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-4">
+              <div class="border rounded p-3 bg-white shadow-sm h-100">
+                <div class="bg-secondary rounded mb-2" style="height: 160px;"></div>
+                <h3 class="fs-5 fw-bold m-0">Sneaker Run</h3>
+                <p class="text-muted m-0">€ 89,00</p>
+              </div>
+            </article>
+
+            <article class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-4">
+              <div class="border rounded p-3 bg-white shadow-sm h-100">
+                <div class="bg-secondary rounded mb-2" style="height: 160px;"></div>
+                <h3 class="fs-5 fw-bold m-0">T-shirt basic</h3>
+                <p class="text-muted m-0">€ 19,00</p>
+              </div>
+            </article>
+
+            <article class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-4">
+              <div class="border rounded p-3 bg-white shadow-sm h-100">
+                <div class="bg-secondary rounded mb-2" style="height: 160px;"></div>
+                <h3 class="fs-5 fw-bold m-0">Borsa city</h3>
+                <p class="text-muted m-0">€ 49,00</p>
+              </div>
+            </article>
+
+            <!-- 4ª card: nascosta fino a xxl, visibile solo da 1400px in su -->
+            <article class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-4 d-none d-xxl-block">
+              <div class="border rounded p-3 bg-white shadow-sm h-100">
+                <div class="bg-secondary rounded mb-2" style="height: 160px;"></div>
+                <h3 class="fs-5 fw-bold m-0">Cappellino sport</h3>
+                <p class="text-muted m-0">€ 15,00</p>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- FOOTER scuro: colonne di link + copyright -->
+    <footer class="bg-dark text-white py-4 mt-5">
+      <div class="container">
+
+        <!-- 3 colonne: una sotto l'altra su mobile, affiancate da md (768px) -->
+        <div class="row text-center text-md-start">
+          <div class="col-md-4 mb-4">
+            <h4 class="fs-6 fw-bold text-uppercase mb-3">Azienda</h4>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Chi siamo</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Lavora con noi</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Negozi</a>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h4 class="fs-6 fw-bold text-uppercase mb-3">Aiuto</h4>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Spedizioni</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Resi e rimborsi</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">FAQ</a>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h4 class="fs-6 fw-bold text-uppercase mb-3">Social</h4>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Instagram</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Facebook</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">TikTok</a>
+          </div>
+        </div>
+
+        <!-- Riga copyright -->
+        <div class="border-top border-secondary pt-3 text-center">
+          <p class="m-0">© 2026 EpiShop — tutti i diritti riservati</p>
+        </div>
+
+      </div>
+    </footer>
+
+  </body>
+</html>
