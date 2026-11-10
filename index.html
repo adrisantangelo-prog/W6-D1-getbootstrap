@@ -1,130 +1,172 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EpiShop — E-commerce</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-  <body>
 
-    <!-- HEADER: logo a sinistra, link a destra -->
-    <header class="bg-primary text-white py-3">
-      <div class="container d-flex justify-content-between align-items-center">
-        <h1 class="fs-3 m-0">EpiShop</h1>
-        <nav>
-          <a href="#" class="text-white text-decoration-none mx-2">Prodotti</a>
-          <a href="#" class="text-white text-decoration-none mx-2">Offerte</a>
-          <!-- "Contatti" nascosto solo su mobile, visibile da md (768px) in su -->
-          <a href="#" class="text-white text-decoration-none mx-2 d-none d-md-inline">Contatti</a>
-          <!-- "Account" visibile solo da desktop (lg, 992px) in su -->
-          <a href="#" class="text-white text-decoration-none mx-2 d-none d-lg-inline">Account</a>
-        </nav>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EpiShop — E-commerce</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
 
-    <!-- HERO: titolo, sottotitolo, bottone CTA -->
-    <section class="bg-light py-5">
-      <div class="container text-center">
-        <h2 class="display-6 fw-bold mb-3">Saldi di primavera</h2>
-        <p class="fs-5 text-muted mb-4">Scopri le offerte sui prodotti in evidenza, fino al 50% di sconto.</p>
-        <a href="#" class="btn btn-primary px-4">Vedi i prodotti</a>
-      </div>
-    </section>
+<body>
 
-    <main class="container my-5">
-      <div class="row">
-
-        <!-- SIDEBAR: nascosta fino a lg (992px), visibile da lg in su -->
-        <aside class="col-lg-3 d-none d-lg-block mb-4">
-          <div class="bg-light p-3 rounded border">
-            <h3 class="fs-5 fw-bold mb-3">Categorie</h3>
-            <p class="mb-2">Scarpe</p>
-            <p class="mb-2">T-shirt</p>
-            <p class="mb-2">Borse</p>
-            <p class="mb-0">Accessori</p>
-          </div>
-        </aside>
-
-        <!-- CONTENUTO: tutta la riga su mobile/tablet, 9 colonne da lg -->
-        <section class="col-12 col-lg-9">
-          <h2 class="fs-3 fw-bold mb-4 text-center text-md-start">Prodotti in evidenza</h2>
-
-          <!-- Griglia: 1 per riga (mobile) / 2 (md) / 3 (lg) / 4 (xxl) -->
-          <div class="row">
-
-            <article class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-4">
-              <div class="border rounded p-3 bg-white shadow-sm h-100">
-                <div class="bg-secondary rounded mb-2" style="height: 160px;"></div>
-                <h3 class="fs-5 fw-bold m-0">Sneaker Run</h3>
-                <p class="text-muted m-0">€ 89,00</p>
-              </div>
-            </article>
-
-            <article class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-4">
-              <div class="border rounded p-3 bg-white shadow-sm h-100">
-                <div class="bg-secondary rounded mb-2" style="height: 160px;"></div>
-                <h3 class="fs-5 fw-bold m-0">T-shirt basic</h3>
-                <p class="text-muted m-0">€ 19,00</p>
-              </div>
-            </article>
-
-            <article class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-4">
-              <div class="border rounded p-3 bg-white shadow-sm h-100">
-                <div class="bg-secondary rounded mb-2" style="height: 160px;"></div>
-                <h3 class="fs-5 fw-bold m-0">Borsa city</h3>
-                <p class="text-muted m-0">€ 49,00</p>
-              </div>
-            </article>
-
-            <!-- 4ª card: nascosta fino a xxl, visibile solo da 1400px in su -->
-            <article class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-4 d-none d-xxl-block">
-              <div class="border rounded p-3 bg-white shadow-sm h-100">
-                <div class="bg-secondary rounded mb-2" style="height: 160px;"></div>
-                <h3 class="fs-5 fw-bold m-0">Cappellino sport</h3>
-                <p class="text-muted m-0">€ 15,00</p>
-              </div>
-            </article>
-
-          </div>
-        </section>
-
-      </div>
-    </main>
-
-    <!-- FOOTER scuro: colonne di link + copyright -->
-    <footer class="bg-dark text-white py-4 mt-5">
+  <!-- HEADER: logo a sinistra, link a destra -->
+  <header>
+    <nav class="navbar navbar-expand-md bg-primary navbar-dark">
       <div class="container">
-
-        <!-- 3 colonne: una sotto l'altra su mobile, affiancate da md (768px) -->
-        <div class="row text-center text-md-start">
-          <div class="col-md-4 mb-4">
-            <h4 class="fs-6 fw-bold text-uppercase mb-3">Azienda</h4>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Chi siamo</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Lavora con noi</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Negozi</a>
-          </div>
-          <div class="col-md-4 mb-4">
-            <h4 class="fs-6 fw-bold text-uppercase mb-3">Aiuto</h4>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Spedizioni</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Resi e rimborsi</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">FAQ</a>
-          </div>
-          <div class="col-md-4 mb-4">
-            <h4 class="fs-6 fw-bold text-uppercase mb-3">Social</h4>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Instagram</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Facebook</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">TikTok</a>
-          </div>
+        <a class="navbar-brand fw-bold" href="#">EpiShop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-menu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="nav-menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#">Prodotti</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Offerte</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contatti</a></li>
+          </ul>
         </div>
-
-        <!-- Riga copyright -->
-        <div class="border-top border-secondary pt-3 text-center">
-          <p class="m-0">© 2026 EpiShop — tutti i diritti riservati</p>
-        </div>
-
       </div>
-    </footer>
+    </nav>
+  </header>
 
-  </body>
+  <!-- HERO: carousel con 3 slide -->
+  <div id="hero" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3500">
+
+    <!-- Le slide vengono generate da JavaScript (array "slides") -->
+    <div class="carousel-inner" id="slides-container"></div>
+
+    <!-- Controlli prev/next: SOTTO il carousel-inner -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#hero" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#hero" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+
+  </div> <!-- fine #hero -->
+
+  <main class="container my-5">
+    <div class="alert alert-info alert-dismissible">Spedizione gratis sopra i 50€.
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    <div class="row">
+
+      <!-- SIDEBAR: nascosta fino a lg (992px), visibile da lg in su -->
+      <aside class="col-lg-3 d-none d-lg-block mb-4">
+        <div class="bg-light p-3 rounded border">
+          <h3 class="fs-5 fw-bold mb-3">Categorie</h3>
+          <p class="mb-2">Scarpe</p>
+          <p class="mb-2">T-shirt</p>
+          <p class="mb-2">Borse</p>
+          <p class="mb-0">Accessori</p>
+        </div>
+      </aside>
+
+      <!-- CONTENUTO: tutta la riga su mobile/tablet, 9 colonne da lg -->
+      <section class="col-12 col-lg-9">
+        <h2 class="fs-3 fw-bold mb-4 text-center text-md-start">Prodotti in evidenza<span
+            class="badge bg-danger ms-2 fs-6">-30%</span></h2>
+
+        <!-- Griglia: 1 per riga (mobile) / 2 (md) / 3 (lg) / 4 (xxl) -->
+        <!-- Le card vengono generate da JavaScript (array "prodotti") -->
+        <div class="row" id="prodotti-container"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- I modal dei prodotti vengono generati da JavaScript -->
+  <div id="modals-container"></div>
+
+  <!-- FOOTER scuro: colonne di link + copyright -->
+  <footer class="bg-dark text-white py-4 mt-5">
+    <div class="container">
+
+      <!-- 3 colonne: una sotto l'altra su mobile, affiancate da md (768px) -->
+      <div class="row text-center text-md-start">
+        <div class="col-md-4 mb-4">
+          <h4 class="fs-6 fw-bold text-uppercase mb-3">Azienda</h4>
+          <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Chi siamo</a>
+          <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Lavora con noi</a>
+          <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Negozi</a>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h4 class="fs-6 fw-bold text-uppercase mb-3">Aiuto</h4>
+          <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Spedizioni</a>
+          <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Resi e rimborsi</a>
+          <a href="#" class="d-block text-white-50 text-decoration-none mb-2">FAQ</a>
+        </div>
+        <div class="col-md-4 mb-4">
+          <h4 class="fs-6 fw-bold text-uppercase mb-3">Social</h4>
+          <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Instagram</a>
+          <a href="#" class="d-block text-white-50 text-decoration-none mb-2">Facebook</a>
+          <a href="#" class="d-block text-white-50 text-decoration-none mb-2">TikTok</a>
+        </div>
+      </div>
+
+      <!-- Riga copyright -->
+      <div class="border-top border-secondary pt-3 text-center">
+        <p class="m-0">© 2026 EpiShop — tutti i diritti riservati</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ===== TEMPLATE: modelli HTML che script.js copia e riempie ===== -->
+
+  <!-- Modello di una slide -->
+  <template id="tpl-slide">
+    <div class="carousel-item text-white text-center py-5">
+      <div class="container">
+        <h2 class="fs-1 fw-bold mb-2 slide-titolo"></h2>
+        <p class="fs-5 m-0 slide-sottotitolo"></p>
+      </div>
+    </div>
+  </template>
+
+  <!-- Modello di una card prodotto -->
+  <template id="tpl-card">
+    <article class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-4">
+      <div class="card h-100 shadow-sm">
+        <img src="https://placehold.co/300x180" class="card-img-top" alt="">
+        <div class="card-body">
+          <h3 class="card-title fs-5 fw-bold"></h3>
+          <p class="card-text text-muted prodotto-descrizione"></p>
+          <p class="card-text fw-bold m-0 prodotto-prezzo"></p>
+        </div>
+        <div class="card-footer bg-white border-0">
+          <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal">Dettagli</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <!-- Modello di un modal prodotto -->
+  <template id="tpl-modal">
+    <div class="modal fade" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+          </div>
+          <div class="modal-body">
+            <img src="https://placehold.co/600x300" class="img-fluid mb-3" alt="">
+            <p class="prodotto-descrizione"></p>
+            <p class="fw-bold fs-4 m-0 prodotto-prezzo"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+            <button type="button" class="btn btn-success">Aggiungi al carrello</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/javascript"></script>
+</body>
+
 </html>

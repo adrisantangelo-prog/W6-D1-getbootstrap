@@ -1,0 +1,95 @@
+// ===== DATI =====
+const slides = [
+  {
+    titolo: "Saldi di primavera",
+    sottotitolo: "Fino al 50% di sconto sui prodotti in evidenza",
+    colore: "primary"
+  },
+  {
+    titolo: "Nuova collezione",
+    sottotitolo: "Scopri gli arrivi della settimana",
+    colore: "success"
+  },
+  {
+    titolo: "Spedizione gratis",
+    sottotitolo: "Sopra i 50 € su tutto il sito",
+    colore: "dark"
+  }
+];
+
+const prodotti = [
+  {
+    nome: "Sneaker Run",
+    prezzo: 89,
+    descrizione: "Scarpa da corsa leggera e traspirante."
+  },
+  {
+    nome: "Felpa Urban",
+    prezzo: 59,
+    descrizione: "Felpa in cotone con cappuccio."
+  },
+  {
+    nome: "Zaino Trek",
+    prezzo: 45,
+    descrizione: "Zaino da 25 litri, impermeabile."
+  }
+];
+
+// Colori ammessi: se arriva un valore diverso, si usa "secondary"
+const coloriAmmessi = ["primary", "secondary", "success", "danger", "warning", "info", "dark"];
+
+// SICUREZZA (anti XSS):
+// - l'HTML sta nei <template> di index.html, non in stringhe JavaScript
+// - i dati vengono inseriti SOLO con textContent / setAttribute / classList,
+//   che li trattano come testo semplice: un eventuale "<script>" nei dati
+//   verrebbe mostrato come testo, mai eseguito.
+
+// ===== CAROUSEL =====
+const slidesContainer = document.getElementById("slides-container");
+const tplSlide = document.getElementById("tpl-slide");
+
+slides.forEach((slide, i) => {
+  const copia = tplSlide.content.cloneNode(true);   // copia del modello
+  const item = copia.querySelector(".carousel-item");
+
+  if (i === 0) item.classList.add("active");        // solo la prima slide
+  const colore = coloriAmmessi.includes(slide.colore) ? slide.colore : "secondary";
+  item.classList.add(`bg-${colore}`);
+
+  copia.querySelector(".slide-titolo").textContent = slide.titolo;
+  copia.querySelector(".slide-sottotitolo").textContent = slide.sottotitolo;
+
+  slidesContainer.appendChild(copia);
+});
+
+// ===== PRODOTTI =====
+// ordine casuale a ogni caricamento della pagina
+prodotti.sort(() => Math.random() - 0.5);
+
+const prodottiContainer = document.getElementById("prodotti-container");
+const modalsContainer = document.getElementById("modals-container");
+const tplCard = document.getElementById("tpl-card");
+const tplModal = document.getElementById("tpl-modal");
+
+prodotti.forEach((prodotto, i) => {
+  const id = `prodotto-${i + 1}`;
+  const prezzo = `€ ${Number(prodotto.prezzo).toFixed(2).replace(".", ",")}`;
+
+  // --- card ---
+  const card = tplCard.content.cloneNode(true);
+  card.querySelector("img").alt = prodotto.nome;
+  card.querySelector(".card-title").textContent = prodotto.nome;
+  card.querySelector(".prodotto-descrizione").textContent = prodotto.descrizione;
+  card.querySelector(".prodotto-prezzo").textContent = prezzo;
+  card.querySelector("button").setAttribute("data-bs-target", `#${id}`);
+  prodottiContainer.appendChild(card);
+
+  // --- modal collegato alla card ---
+  const modal = tplModal.content.cloneNode(true);
+  modal.querySelector(".modal").id = id;
+  modal.querySelector("img").alt = prodotto.nome;
+  modal.querySelector(".modal-title").textContent = prodotto.nome;
+  modal.querySelector(".prodotto-descrizione").textContent = prodotto.descrizione;
+  modal.querySelector(".prodotto-prezzo").textContent = prezzo;
+  modalsContainer.appendChild(modal);
+});
