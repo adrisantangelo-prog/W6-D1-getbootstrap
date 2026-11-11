@@ -36,13 +36,63 @@ const prodotti = [
 ];
 
 // Colori ammessi: se arriva un valore diverso, si usa "secondary"
-const coloriAmmessi = ["primary", "secondary", "success", "danger", "warning", "info", "dark"];
+const coloriAmmessi = [
+  "primary",
+  "secondary",
+  "success",
+  "danger",
+  "warning",
+  "info",
+  "dark"
+];
 
 // SICUREZZA (anti XSS):
 // - l'HTML sta nei <template> di index.html, non in stringhe JavaScript
 // - i dati vengono inseriti SOLO con textContent / setAttribute / classList,
 //   che li trattano come testo semplice: un eventuale "<script>" nei dati
 //   verrebbe mostrato come testo, mai eseguito.
+
+// ===== TEMA CHIARO / SCURO =====
+// Bootstrap 5.3 cambia i colori in base all'attributo data-bs-theme su <html>.
+
+const CHIAVE_TEMA = "tema";
+
+// Legge il tema salvato; se non c'è, usa quello del sistema operativo
+function leggiTemaIniziale() {
+  let salvato = null;
+  try {
+    salvato = localStorage.getItem(CHIAVE_TEMA);
+  } catch (e) {
+    // localStorage non disponibile (es. navigazione privata): si ignora
+  }
+  if (salvato === "light" || salvato === "dark") return salvato;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+// Applica il tema alla pagina e aggiorna il testo del bottone
+function applicaTema(tema) {
+  document.documentElement.setAttribute("data-bs-theme", tema);
+
+  const btn = document.getElementById("btn-tema");
+  if (btn) {
+    btn.textContent = tema === "dark" ? "☀️ Chiaro" : "🌙 Scuro";
+  }
+}
+
+// Passa da chiaro a scuro (e viceversa) e salva la scelta
+function cambiaTema() {
+  const attuale = document.documentElement.getAttribute("data-bs-theme");
+  const nuovo = attuale === "dark" ? "light" : "dark";
+  applicaTema(nuovo);
+  try {
+    localStorage.setItem(CHIAVE_TEMA, nuovo);
+  } catch (e) {
+    // impossibile salvare: il tema vale solo per questa visita
+  }
+}
+
+applicaTema(leggiTemaIniziale());
+document.getElementById("btn-tema").addEventListener("click", cambiaTema);
 
 // ===== CAROUSEL =====
 const slidesContainer = document.getElementById("slides-container");
