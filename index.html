@@ -69,12 +69,26 @@
 
       <!-- CONTENUTO: tutta la riga su mobile/tablet, 9 colonne da lg -->
       <section class="col-12 col-lg-9">
-        <h2 class="fs-3 fw-bold mb-4 text-center text-md-start">Prodotti in evidenza<span
+        <h2 class="fs-3 fw-bold mb-3 text-center text-md-start">Prodotti in evidenza<span
             class="badge bg-danger ms-2 fs-6">-30%</span></h2>
+
+        <!-- FILTRI: un solo listener sul contenitore (event delegation) -->
+        <div id="filtri" class="d-flex flex-wrap gap-2 justify-content-center justify-content-md-start mb-3">
+          <button type="button" class="btn btn-outline-primary btn-sm active" data-categoria="tutti">Tutti</button>
+          <button type="button" class="btn btn-outline-primary btn-sm" data-categoria="scarpe">Scarpe</button>
+          <button type="button" class="btn btn-outline-primary btn-sm" data-categoria="abbigliamento">Abbigliamento</button>
+          <button type="button" class="btn btn-outline-primary btn-sm" data-categoria="accessori">Accessori</button>
+        </div>
+
+        <!-- CONTATORE: aggiornato da renderProdotti -->
+        <p class="text-muted mb-3">Mostrati: <span id="contatore">6</span> su <span id="contatore-totale">6</span></p>
 
         <!-- Griglia: 1 per riga (mobile) / 2 (md) / 3 (lg) / 4 (xxl) -->
         <!-- Le card vengono generate da JavaScript (array "prodotti") -->
         <div class="row" id="prodotti-container"></div>
+
+        <!-- TOTALE: calcolato con reduce in calcolaTotale -->
+        <p class="fw-bold fs-5 text-end border-top pt-3 m-0">Totale catalogo: <span id="totale">€ 0,00</span></p>
       </section>
 
     </div>
@@ -130,11 +144,13 @@
   </template>
 
   <!-- Modello di una card prodotto -->
+  <!-- .card-prodotto + data-categoria (impostato da JS) decidono colore e hover nel CSS -->
   <template id="tpl-card">
     <article class="col-12 col-md-6 col-lg-4 col-xxl-3 mb-4">
-      <div class="card h-100 shadow-sm">
-        <img src="https://placehold.co/300x180" class="card-img-top" alt="">
+      <div class="card card-prodotto h-100 shadow-sm">
+        <img src="" class="card-img-top" alt="">
         <div class="card-body">
+          <span class="badge badge-categoria mb-2"></span>
           <h3 class="card-title fs-5 fw-bold"></h3>
           <p class="card-text text-muted prodotto-descrizione"></p>
           <p class="card-text fw-bold m-0 prodotto-prezzo"></p>
@@ -156,7 +172,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
           </div>
           <div class="modal-body">
-            <img src="https://placehold.co/600x300" class="img-fluid mb-3" alt="">
+            <img src="" class="img-fluid w-100 mb-3" alt="">
             <p class="prodotto-descrizione"></p>
             <p class="fw-bold fs-4 m-0 prodotto-prezzo"></p>
           </div>
@@ -170,7 +186,7 @@
   </template>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/javascript"></script>
+  <script src="assets\js\javascript"></script>
 </body>
 
 </html>

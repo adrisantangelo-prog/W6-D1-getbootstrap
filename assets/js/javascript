@@ -17,21 +17,55 @@ const slides = [
   }
 ];
 
+// categoria: una tra "scarpe", "abbigliamento", "accessori"
 const prodotti = [
   {
+    id: 1,
     nome: "Sneaker Run",
     prezzo: 89,
-    descrizione: "Scarpa da corsa leggera e traspirante."
+    categoria: "scarpe",
+    descrizione: "Scarpa da corsa leggera e traspirante.",
+    img: "https://placehold.co/300x180"
   },
   {
+    id: 2,
     nome: "Felpa Urban",
     prezzo: 59,
-    descrizione: "Felpa in cotone con cappuccio."
+    categoria: "abbigliamento",
+    descrizione: "Felpa in cotone con cappuccio.",
+    img: "https://placehold.co/300x180"
   },
   {
+    id: 3,
     nome: "Zaino Trek",
     prezzo: 45,
-    descrizione: "Zaino da 25 litri, impermeabile."
+    categoria: "accessori",
+    descrizione: "Zaino da 25 litri, impermeabile.",
+    img: "https://placehold.co/300x180"
+  },
+  {
+    id: 4,
+    nome: "T-shirt Basic",
+    prezzo: 29,
+    categoria: "abbigliamento",
+    descrizione: "T-shirt in cotone biologico, vestibilità regolare.",
+    img: "https://placehold.co/300x180"
+  },
+  {
+    id: 5,
+    nome: "Ciabatta Pool",
+    prezzo: 25,
+    categoria: "scarpe",
+    descrizione: "Ciabatta in gomma morbida, ideale per piscina e mare.",
+    img: "https://placehold.co/300x180"
+  },
+  {
+    id: 6,
+    nome: "Cappellino Sport",
+    prezzo: 22,
+    categoria: "accessori",
+    descrizione: "Cappellino con visiera e chiusura regolabile.",
+    img: "https://placehold.co/300x180"
   }
 ];
 
@@ -46,11 +80,20 @@ const coloriAmmessi = [
   "dark"
 ];
 
+// Categorie ammesse: un valore diverso non riceve nessun colore speciale
+const categorieAmmesse = ["scarpe", "abbigliamento", "accessori"];
+
 // SICUREZZA (anti XSS):
 // - l'HTML sta nei <template> di index.html, non in stringhe JavaScript
 // - i dati vengono inseriti SOLO con textContent / setAttribute / classList,
 //   che li trattano come testo semplice: un eventuale "<script>" nei dati
 //   verrebbe mostrato come testo, mai eseguito.
+
+// ===== UTILITÀ =====
+// 89 -> "€ 89,00"
+function formattaPrezzo(valore) {
+  return `€ ${Number(valore).toFixed(2).replace(".", ",")}`;
+}
 
 // ===== TEMA CHIARO / SCURO =====
 // Bootstrap 5.3 cambia i colori in base all'attributo data-bs-theme su <html>.
@@ -91,55 +134,114 @@ function cambiaTema() {
   }
 }
 
-applicaTema(leggiTemaIniziale());
-document.getElementById("btn-tema").addEventListener("click", cambiaTema);
-
 // ===== CAROUSEL =====
 const slidesContainer = document.getElementById("slides-container");
 const tplSlide = document.getElementById("tpl-slide");
 
-slides.forEach((slide, i) => {
-  const copia = tplSlide.content.cloneNode(true);   // copia del modello
-  const item = copia.querySelector(".carousel-item");
+function renderSlides() {
+  slides.forEach((slide, i) => {
+    const copia = tplSlide.content.cloneNode(true);   // copia del modello
+    const item = copia.querySelector(".carousel-item");
 
-  if (i === 0) item.classList.add("active");        // solo la prima slide
-  const colore = coloriAmmessi.includes(slide.colore) ? slide.colore : "secondary";
-  item.classList.add(`bg-${colore}`);
+    if (i === 0) item.classList.add("active");        // solo la prima slide
+    const colore = coloriAmmessi.includes(slide.colore) ? slide.colore : "secondary";
+    item.classList.add(`bg-${colore}`);
 
-  copia.querySelector(".slide-titolo").textContent = slide.titolo;
-  copia.querySelector(".slide-sottotitolo").textContent = slide.sottotitolo;
+    copia.querySelector(".slide-titolo").textContent = slide.titolo;
+    copia.querySelector(".slide-sottotitolo").textContent = slide.sottotitolo;
 
-  slidesContainer.appendChild(copia);
-});
+    slidesContainer.appendChild(copia);
+  });
+}
 
 // ===== PRODOTTI =====
-// ordine casuale a ogni caricamento della pagina
-prodotti.sort(() => Math.random() - 0.5);
-
 const prodottiContainer = document.getElementById("prodotti-container");
 const modalsContainer = document.getElementById("modals-container");
 const tplCard = document.getElementById("tpl-card");
 const tplModal = document.getElementById("tpl-modal");
 
-prodotti.forEach((prodotto, i) => {
-  const id = `prodotto-${i + 1}`;
-  const prezzo = `€ ${Number(prodotto.prezzo).toFixed(2).replace(".", ",")}`;
+// Somma i prezzi della lista con reduce
+function calcolaTotale(lista) {
+  return lista.reduce((somma, prodotto) => somma + Number(prodotto.prezzo), 0);
+}
 
-  // --- card ---
-  const card = tplCard.content.cloneNode(true);
-  card.querySelector("img").alt = prodotto.nome;
-  card.querySelector(".card-title").textContent = prodotto.nome;
-  card.querySelector(".prodotto-descrizione").textContent = prodotto.descrizione;
-  card.querySelector(".prodotto-prezzo").textContent = prezzo;
-  card.querySelector("button").setAttribute("data-bs-target", `#${id}`);
-  prodottiContainer.appendChild(card);
+// Disegna le card (e i loro modal) per la lista ricevuta
+function renderProdotti(lista) {
+  // svuota la griglia e i modal del render precedente
+  prodottiContainer.replaceChildren();
+  modalsContainer.replaceChildren();
 
-  // --- modal collegato alla card ---
-  const modal = tplModal.content.cloneNode(true);
-  modal.querySelector(".modal").id = id;
-  modal.querySelector("img").alt = prodotto.nome;
-  modal.querySelector(".modal-title").textContent = prodotto.nome;
-  modal.querySelector(".prodotto-descrizione").textContent = prodotto.descrizione;
-  modal.querySelector(".prodotto-prezzo").textContent = prezzo;
-  modalsContainer.appendChild(modal);
+  lista.forEach((prodotto) => {
+    // l'id del modal usa l'id del prodotto: resta lo stesso anche dopo un filtro
+    const id = `prodotto-${prodotto.id}`;
+    const prezzo = formattaPrezzo(prodotto.prezzo);
+    const categoria = categorieAmmesse.includes(prodotto.categoria) ? prodotto.categoria : "";
+
+    // --- card ---
+    const card = tplCard.content.cloneNode(true);
+    const img = card.querySelector("img");
+    img.setAttribute("src", prodotto.img);
+    img.alt = prodotto.nome;
+    card.querySelector(".card-prodotto").dataset.categoria = categoria;
+    card.querySelector(".badge-categoria").textContent = categoria;
+    card.querySelector(".card-title").textContent = prodotto.nome;
+    card.querySelector(".prodotto-descrizione").textContent = prodotto.descrizione;
+    card.querySelector(".prodotto-prezzo").textContent = prezzo;
+    card.querySelector("button").setAttribute("data-bs-target", `#${id}`);
+    prodottiContainer.appendChild(card);
+
+    // --- modal collegato alla card ---
+    const modal = tplModal.content.cloneNode(true);
+    modal.querySelector(".modal").id = id;
+    const imgModal = modal.querySelector("img");
+    imgModal.setAttribute("src", prodotto.img);
+    imgModal.alt = prodotto.nome;
+    modal.querySelector(".modal-title").textContent = prodotto.nome;
+    modal.querySelector(".prodotto-descrizione").textContent = prodotto.descrizione;
+    modal.querySelector(".prodotto-prezzo").textContent = prezzo;
+    modalsContainer.appendChild(modal);
+  });
+
+  // contatore e totale aggiornati a ogni render
+  document.getElementById("contatore").textContent = lista.length;
+  document.getElementById("contatore-totale").textContent = prodotti.length;
+  document.getElementById("totale").textContent = formattaPrezzo(calcolaTotale(lista));
+}
+
+// ===== FILTRI (event delegation) =====
+// Un solo listener sul contenitore: funziona per tutti i bottoni, anche futuri
+const filtri = document.getElementById("filtri");
+
+filtri.addEventListener("click", function (event) {
+  const bottone = event.target.closest("[data-categoria]");
+  if (!bottone) return;   // click fuori dai bottoni
+
+  // (a) evidenzia solo il bottone cliccato
+  filtri.querySelectorAll(".btn").forEach(b => b.classList.remove("active"));
+  bottone.classList.add("active");
+
+  // (b) categoria scelta
+  const categoria = bottone.dataset.categoria;
+
+  // (c) lista filtrata
+  const filtrati = categoria === "tutti"
+    ? prodotti
+    : prodotti.filter(p => p.categoria === categoria);
+
+  // (d) ridisegna la griglia
+  renderProdotti(filtrati);
 });
+
+// ===== INIT: prepara la pagina al caricamento =====
+function init() {
+  applicaTema(leggiTemaIniziale());
+  document.getElementById("btn-tema").addEventListener("click", cambiaTema);
+
+  renderSlides();
+
+  // ordine casuale a ogni caricamento della pagina
+  prodotti.sort(() => Math.random() - 0.5);
+  renderProdotti(prodotti);
+}
+
+init();
